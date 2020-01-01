@@ -2,6 +2,10 @@ application.name: @project.name@
 application.title: TDS Cache
 application.organization: Technical Development Solutions
 application.version: @project.version@
-#application.buildNumber: @buildNumber@
 application.buildDateTime: @timestamp@
 
+cache.security.user.password: password
+cache.security.admin.password: password
+cache.expire.enabled: false
+cache.expire.time.minutes: 10
+cache.size.max: 1000

@@ -31,15 +31,23 @@ public class CustomAuthenticationManager implements AuthenticationProvider {
     public CustomAuthenticationManager(Environment environment) {
         this.environment = environment;
 
+        String userPassword = environment.getProperty("cache.security.user.password") != null ?
+                environment.getProperty("security.user.password") :
+                "password";
+
+        String adminPassword = environment.getProperty("cache.security.admin.password") != null ?
+                environment.getProperty("security.admin.password") :
+                "password";
+
         CustomUserDetails user = new CustomUserDetails();
         user.setUsername("user");
-        user.setPassword("password");
+        user.setPassword(userPassword);
         user.setAuthorities(new ArrayList<>(Arrays.asList(new UserAuthority())));
         this.users.add(user);
 
         CustomUserDetails admin = new CustomUserDetails();
         admin.setUsername("admin");
-        admin.setPassword("password");
+        admin.setPassword(adminPassword);
         admin.setAuthorities(new ArrayList<>(Arrays.asList(new UserAuthority(), new ApiAuthority(), new AdminAuthority())));
         this.users.add(admin);
     }
