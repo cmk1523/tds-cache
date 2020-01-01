@@ -1,0 +1,7 @@
+application.name: @project.name@
+application.title: TDS Cache
+application.organization: Technical Development Solutions
+application.version: @project.version@
+#application.buildNumber: @buildNumber@
+application.buildDateTime: @timestamp@
+
