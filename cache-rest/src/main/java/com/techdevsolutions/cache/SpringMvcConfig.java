@@ -1,25 +1,29 @@
 package com.techdevsolutions.cache;
 
 import com.techdevsolutions.cache.controllers.ControllerInterceptor;
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.core.env.Environment;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import java.util.Collections;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-@EnableSwagger2
-public class SpringMvcConfig extends WebMvcConfigurerAdapter {
+public class SpringMvcConfig implements WebMvcConfigurer {
+    private Environment environment;
+
+    @Autowired
+    public SpringMvcConfig(Environment environment) {
+        this.environment = environment;
+    }
+
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         // Need thymeleaf for this to work
@@ -34,24 +38,25 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.techdevsolutions"))
-                .paths(PathSelectors.ant("/api/v1/**"))
-                .build()
-                .pathMapping("/")
-                .apiInfo(apiInfo());
+    public OpenAPI customOpenAPI() {
+        io.swagger.v3.oas.models.info.Contact contact = new Contact()
+                .name(this.environment.getProperty("swagger.contact.name"))
+                .url(this.environment.getProperty("swagger.contact.url"))
+                .email(this.environment.getProperty("swagger.contact.email"));
 
-    }
+        License license = new License()
+                .name(this.environment.getProperty("swagger.api.license"))
+                .url(this.environment.getProperty("swagger.api.license.url"));
 
-    private ApiInfo apiInfo() {
-        return new ApiInfo(
-                "My REST API",
-                "My REST API description",
-                "0.0.1",
-                "My terms of service",
-                new Contact("John Doe", "www.example.com", "myeaddress@company.com"),
-                "License of API", "API license URL", Collections.emptyList());
+        return new OpenAPI()
+                .components(new Components())
+                .info(new Info()
+                        .title(this.environment.getProperty("swagger.title"))
+                        .description(this.environment.getProperty("swagger.description"))
+                        .version(this.environment.getProperty("application.version"))
+                        .termsOfService( this.environment.getProperty("swagger.tos.url"))
+                        .contact(contact)
+                        .license(license)
+                );
     }
 }

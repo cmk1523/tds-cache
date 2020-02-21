@@ -1,3 +1,3 @@
 # Technical Development Solutions Cache
 
-A REST cache
+A REST (non-distributed) cache

@@ -2,6 +2,7 @@ package com.techdevsolutions.cache.service;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import com.github.benmanes.caffeine.cache.Weigher;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -30,6 +31,13 @@ public class CacheService {
         if (expire) {
             i.expireAfterWrite(expireMin, TimeUnit.MINUTES);
         }
+
+//        i.maximumWeight(100000);
+//        i.weigher(new Weigher<String, String>() {
+//            public int weigh(String key, String value) {
+//                return value.length();
+//            }
+//        });
 
         i.maximumSize(maxSize);
         this.cache = i.build();

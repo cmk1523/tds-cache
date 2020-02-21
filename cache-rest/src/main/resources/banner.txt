@@ -1,8 +1,8 @@
 
-
-    ${application.title}
-    ${application.name} v${application.version} ${application.buildDateTime}
-    ${application.organization}
-
+    Title: ${application.title}
+    Name: ${application.name}
+    Organization: ${application.organization}
+    Version: v${application.version}
+    Build #: ${application.buildNumber}
+    Build Date: ${application.buildDateTime}
     Environment: ${application.environment}
-

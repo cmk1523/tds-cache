@@ -1,8 +1,24 @@
 application.name: @project.name@
-application.title: TDS Cache
+application.title: TDS REST Cache
 application.organization: Technical Development Solutions
 application.version: @project.version@
 application.buildDateTime: @timestamp@
+
+swagger.title: TDS REST Cache
+swagger.description: A simple non-distributed REST cache
+swagger.tos.url: http://techdevsolutions.com
+swagger.contact.name: Chris K.
+swagger.contact.url: http://techdevsolutions.com
+swagger.contact.email: chris@techdevsolutions.com
+swagger.api.license: All Rights Reserved
+swagger.api.license.url: http://techdevsolutions.com
+
+security.custom.system: custom
+security.custom.admin.password: password
+security.custom.user.password: password
+
+logging.level.ROOT: info
+logging.level.com.techdevsolutions: debug
 
 cache.security.user.password: password
 cache.security.admin.password: password

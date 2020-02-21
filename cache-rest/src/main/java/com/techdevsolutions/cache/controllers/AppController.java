@@ -1,7 +1,7 @@
 package com.techdevsolutions.cache.controllers;
 
 import com.techdevsolutions.common.beans.rest.Response;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -17,6 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/app")
+@Tag(name = "app", description = "Application information")
 public class AppController extends BaseController {
 
     @Autowired
@@ -50,18 +51,5 @@ public class AppController extends BaseController {
             return this.generateErrorResponse(request, HttpStatus.INTERNAL_SERVER_ERROR, e.toString());
         }
     }
-
-
-//    @ResponseBody
-//    @RequestMapping(value = "install", method = RequestMethod.GET)
-//    public Object install(HttpServletRequest request, HttpServletResponse response) {
-//        try {
-//            this.installerService.install();
-//            return new Response(null, this.getTimeTook(request));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return this.generateErrorResponse(request, HttpStatus.INTERNAL_SERVER_ERROR, e.toString());
-//        }
-//    }
 
 }

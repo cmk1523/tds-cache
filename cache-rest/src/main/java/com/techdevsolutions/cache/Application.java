@@ -7,9 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-@SpringBootApplication(scanBasePackages = {
-        "com.techdevsolutions.cache"
-})
+@SpringBootApplication
 public class Application extends SpringBootServletInitializer {
     Logger logger = LoggerFactory.getLogger(this.getClass());
 

@@ -2,6 +2,7 @@ package com.techdevsolutions.cache.controllers;
 
 import com.techdevsolutions.cache.service.CacheService;
 import com.techdevsolutions.common.beans.rest.Response;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/cache")
+@Tag(name = "cache", description = "Cache operations")
 public class CacheController extends BaseController {
     private CacheService cacheService;
 

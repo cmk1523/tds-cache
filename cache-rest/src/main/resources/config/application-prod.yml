@@ -1,1 +1,2 @@
 application.environment: prod
+logging.level.com.techdevsolutions: warn
